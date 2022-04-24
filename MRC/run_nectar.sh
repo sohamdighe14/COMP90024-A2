@@ -1,3 +1,3 @@
 #!/bin/bash
 
-. ./SamyOpenrc.sh; ansible-playbook nectar.yaml
+. ./SamyOpenrc.sh; ansible-playbook -i hosts nectar.yaml
