@@ -14,7 +14,7 @@
 
 
 - ansible.builtin.debug:
-  msg: "security group(s) {{ sg_names }} have been created."
+    msg: "security group(s) {{ sg_names }} have been created."
 
 # Create  security group rules
 - name: Create  security group rule

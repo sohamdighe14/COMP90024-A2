@@ -1,7 +1,7 @@
 #Common vars
-availibility_zone : melbourne-qh2-uom
-instance_image : 356FF1ed-5960-4ac-96a1-0c0198e6a999
-instance_flavor : uom.general.2c8g
+availability_zone : melbourne-qh2-uom
+instance_image : 356ff1ed-5960-4ac2-96a1-0c0198e6a999
+instance_flavor : uom.mse.2c9g
 instance_key_name : slave1samy
 
 #Volume

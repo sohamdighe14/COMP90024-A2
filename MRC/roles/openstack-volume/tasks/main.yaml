@@ -18,4 +18,4 @@
   loop: '{{ os_vol.results }}'
 
 - ansible.builtin.debug:
-  msg: "Volume {{os_vol_ids}} has been created"
+    msg: "Volume {{os_vol_ids}} has been created"
