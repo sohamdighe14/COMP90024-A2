@@ -1,0 +1,1 @@
+. ./group60.sh; ansible-playbook -i ./inventory/inventory.ini nectar.yaml
