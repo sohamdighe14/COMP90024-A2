@@ -2,7 +2,7 @@
 - name: Restart a CouchDB docker container
   community.docker.docker_container:
     name: couchDB
-    image: couchdb
+    image: "ibmcom/couchdb3:3.0.0"
     state: started
     restart: yes
     ports:
