@@ -1,19 +1,21 @@
 ---
+
 - name: Restart a CouchDB docker container
+  become: yes
   community.docker.docker_container:
     name: couchDB
     image: "ibmcom/couchdb3:3.0.0"
     state: started
     restart: yes
     ports:
-     # Publish container port 9000 as host port 8080
+     # Publish couchDB port 5984 as host port 5984
      - "5984:5984"
      # Publish container UDP port 9001 as host port 8081 on interface 127.0.0.1
      - "4369:4369"
      # Publish container port 9002 as a random host port
      - "9100-9200:9100-9200"
     volumes:
-      - /data
+      - /var/lib/docker
     pull: yes
     env:
         COUCHDB_USER: "{{ user }}"

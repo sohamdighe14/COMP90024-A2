@@ -13,5 +13,5 @@
 # Location: India, Melbourne, Singapore
 #
 user: admin
-pass: admin
-masternode: "{{ groups.db_harvestor[0] }}"
+pass: adminpass
+cookie: a192aeb9904e6590849337933b000c99

@@ -5,3 +5,6 @@
 
 [Masternode]
 172.26.128.198
+
+[Docker:vars]
+masternode=172.26.128.198
