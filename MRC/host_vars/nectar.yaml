@@ -6,14 +6,12 @@ instance_key_name : slave1samy
 
 #Volume
 volumes:
-  - vol_name: demo-vol-1-1
-    vol_size: 10
-  - vol_name: demo-vol-1-2
-    vol_size: 10
-  - vol_name: demo-vol-2-1
-    vol_size: 10
-  - vol_name: demo-vol-2-2
-    vol_size: 10
+  - vol_name: master-volume
+    vol_size: 100
+  - vol_name: slave1-volume
+    vol_size: 100
+  - vol_name: slave2-volume
+    vol_size: 100
   
 #Security groups
 security_groups:
@@ -32,7 +30,9 @@ security_groups:
 
 #Instance
 instances:
-  - name: demo-1-Samy
-    volumes: ['demo-vol-1-1', 'demo-vol-1-2']
-  - name: demo-2-Samy
-    volumes: ['demo-vol-2-1', 'demo-vol-2-2']
+  - name: Masternode
+    volumes: ['master-volume']
+  - name: slave1
+    volumes: [slave1-volume]
+  - name: slave2
+    volumes: [slave2-volume]
