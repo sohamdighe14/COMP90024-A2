@@ -17,6 +17,7 @@
 
 # Add nodes to CouchDB cluster
 - name: Add nodes to CouchDB cluster
+  become: yes
   uri:
     url: http://{{ masternode }}:5984/_cluster_setup
     method: POST
@@ -24,6 +25,7 @@
     password: "{{ pass }}"
     force_basic_auth: yes
     status_code: 200, 201
+    return_content: yes
     headers:
       Content-Type: "application/json"
     body_format: json
@@ -31,20 +33,23 @@
 
 # Join nodes to CouchDB cluster
 - name: Join nodes to CouchDB cluster
+  become: yes
   uri:
     url: http://{{ masternode }}:5984/_cluster_setup
     method: POST
     user: "{{ user }}"
     password: "{{ pass }}"
     force_basic_auth: yes
-    status_code: 200, 201
+    status_code: 200, 201, 409
+    return_content: yes
     headers:
       Content-Type: "application/json"
     body_format: json
-    body: "{\"action\":\"add_node\",\"host\":\"{{ inventory_hostname }}\",\"port\":\"5984\",\"username\":\"{{ user }}\",\"password\":\"{{ pass }}\"}"
+    body: "{\"action\":\"add_node\",\"host\":\"{{ inventory_hostname}}\",\"port\":\"5984\",\"username\":\"{{ user }}\",\"password\":\"{{ pass }}\"}"
 
 # Empty request to avoid error messages when finishing cluster setup
 - name: Empty request to avoid error messages when finishing cluster setup
+  become: yes
   uri:
     url: http://{{ masternode }}:5984/
     method: GET
@@ -55,15 +60,17 @@
 
 # Finish cluster setup
 - name: Finish cluster setup
+  become: yes
   uri:
     url: http://{{ masternode }}:5984/_cluster_setup
     method: POST
     user: "{{ user }}"
     password: "{{ pass }}"
     force_basic_auth: yes
+    return_content: yes
     headers:
       Content-Type: "application/json"
-    status_code: 200, 201
+    status_code: 200, 201, 400
     body_format: json
     body: "{\"action\":\"finish_cluster\"}"    
   run_once: true
