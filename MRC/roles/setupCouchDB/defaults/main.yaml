@@ -1,0 +1,5 @@
+---
+user: admin
+pass: adminpass
+cookie: a192aeb9904e6590849337933b000c99
+masternode: "{{groups.Docker[0]}}"

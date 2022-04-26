@@ -1,0 +1,60 @@
+#Common vars
+availability_zone : melbourne-qh2-uom
+instance_image : 356ff1ed-5960-4ac2-96a1-0c0198e6a999
+instance_flavor : uom.mse.2c9g
+instance_key_name : slave1samy
+
+#Volume
+volumes:
+  - vol_name: master-volume
+    vol_size: 100
+  - vol_name: slave1-volume
+    vol_size: 100
+  - vol_name: slave2-volume
+    vol_size: 100
+  
+#Security groups
+security_groups:
+  - name: ssh access
+    description: "Allows SSH access"
+    protocol: tcp
+    port_range_min: 22 
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0
+
+  - name: http access
+    description: "security group for HTTP"
+    protocol: tcp
+    port_range_min: 80 
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+
+  - name: couchDB access
+    description: "Allows access to the couchDB database"
+    protocol: tcp
+    port_range_min: 5984 
+    port_range_max: 5984
+    remote_ip_prefix: 0.0.0.0/0
+
+  - name: nodes communication
+    description: "Allows nodes to communicate "
+    protocol: tcp
+    port_range_min: 4369 
+    port_range_max: 4369
+    remote_ip_prefix: 0.0.0.0/0
+
+  - name: open ports
+    description: "Open ports for applications "
+    protocol: tcp
+    port_range_min: 9100 
+    port_range_max: 9200
+    remote_ip_prefix: 0.0.0.0/0
+
+#Instance
+instances:
+  - name: Masternode
+    volumes: ['master-volume']
+  - name: slave1
+    volumes: [slave1-volume]
+  - name: slave2
+    volumes: [slave2-volume]
