@@ -14,10 +14,23 @@ def read_api_keys(config_file):
         keys[str(item)] = config[item]
     return keys
 
-def generate_auth(key):
-    # given a particular key info, generate an api for the key
-    pass
+def generate_tweepy_api(key):
+    api_key = key["api_key"]
+    api_key_secret = key["api_key_secret"]
+    access_token = key["access_token"]
+    access_token_secret = key["access_token_secret"]
+    auth = tweepy.OAuth1UserHandler(api_key, api_key_secret, access_token, 
+                                    access_token_secret)
+    api = tweepy.API(auth)
+    return api
 
+def harvest_tweets(key):
+    # harvest tweets using a particular key
+    try:
+        api = generate_tweepy_api(key)
+    except tweepy.TweepyException:
+        return None
+    
 def tweet_harvester(keys):
     # given a list of keys, find a key that can be used to harvest tweets and 
     # harvest as many as we can. If no keys work, sleep for 15 minutes
@@ -25,20 +38,10 @@ def tweet_harvester(keys):
 
 def insert_tweets():
     # insert tweets into a couchDB instance (perhaps do some basic filtering)
+    pass
 
 # read configs
 def somethingelse():
-    api_key = config['twitter']['api_key']
-    api_key_secret = config['twitter']['api_key_secret']
-
-    access_token = config['twitter']['access_token']
-    access_token_secret = config['twitter']['access_token_secret']
-
-    # authentication
-    auth = tweepy.OAuth1UserHandler(api_key, api_key_secret, 
-                                    access_token, access_token_secret)
-    api = tweepy.API(auth)
-
     user = api.get_user(screen_name = "Kage_317")
     ID = user.id_str
 
