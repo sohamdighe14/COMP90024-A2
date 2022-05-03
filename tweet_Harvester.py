@@ -4,6 +4,11 @@ import csv
 import pandas as pd
 
 
+MELB_LAT = 	-37.840935
+MELB_LONG = 144.946457
+RADIUS = 40
+
+
 def read_api_keys(config_file):
     # read in all info associated with each key we will be using to authenticate
     # the tweet harvester
@@ -15,6 +20,7 @@ def read_api_keys(config_file):
     return keys
 
 def generate_tweepy_api(key):
+    # generate a tweepy API to use given access tokens and api keys
     api_key = key["api_key"]
     api_key_secret = key["api_key_secret"]
     access_token = key["access_token"]
@@ -24,8 +30,8 @@ def generate_tweepy_api(key):
     api = tweepy.API(auth)
     return api
 
-def harvest_tweets(key):
-    # harvest tweets using a particular key
+def harvest_tweets(key, since_id):
+    # harvest tweets that are newer than a particular tweet using a given key
     try:
         api = generate_tweepy_api(key)
     except tweepy.TweepyException:
