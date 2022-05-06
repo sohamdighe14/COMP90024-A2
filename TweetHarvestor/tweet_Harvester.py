@@ -14,13 +14,20 @@ MELB_LONG = "144.946457"
 RADIUS = "40"
 """
 
+
 class tweetStorer(tweepy.StreamingClient):
 
-    def __init__(self, bear_tok, database):
+    def __init__(self, bear_tok, tokenNb,database):
         super().__init__(bearer_token=bear_tok)
         self.db = database
+        self.tokenNb = tokenNb
 
-    def on_data(self, data):
+    def on_data(self, rawData):
+        jsn = json.loads(rawData)
+        data = jsn["data"]
+        id = data["id"]
+        data["id"]="partition:"+id
+        data["_id"]=data.pop("id")
         self.db.save(data)
 
 def main(tokensFile):
@@ -31,7 +38,7 @@ def main(tokensFile):
 
     for i in range(len(tokens)):
         try:
-            st = generate_tweepy_streamingClient(tokens[i], db)
+            st = generate_tweepy_streamingClient(tokens[i],str(i), db)
             st.filter()
         except Exception:
             print("Streaming client n°"+ str(i)+ " encountered an exception")
@@ -45,9 +52,9 @@ def read_bearer_tokens(tokensFile):
     with open(tokensFile) as f:
         return f.read().splitlines()
 
-def generate_tweepy_streamingClient(bearer_token, db):
+def generate_tweepy_streamingClient(bearer_token,tokennb, db):
     # generate a tweepy API to use given access tokens and api keys
-    stream = tweetStorer(bear_tok = bearer_token, database = db)
+    stream = tweetStorer(bear_tok = bearer_token, tokenNb=tokennb, database = db)
     stream.add_rules(tweepy.StreamRule("#auspol lang:en"))
     return stream
 
