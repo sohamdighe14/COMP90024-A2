@@ -1,4 +1,5 @@
 from lib2to3.pgen2 import token
+from pickle import FALSE, TRUE
 import tweepy
 import configparser
 import csv
@@ -6,6 +7,7 @@ import pandas as pd
 import json
 import couchdb
 import argparse
+import time
 
 
 """
@@ -35,14 +37,27 @@ def main(tokensFile):
     db = couch["election_tweets"]
     
     tokens = read_bearer_tokens(tokensFile)
+    firstIteration = TRUE
+    timers=[]
+    for token in tokens:
+        timers.append(time.time())
 
     for i in range(len(tokens)):
+        print(i)
         try:
+
+            if not(firstIteration):
+                loopTime = time.time()-timers[i]
+                if loopTime < 900:
+                    time.sleep(900-loopTime)
+                firstIteration=FALSE
+            
             st = generate_tweepy_streamingClient(tokens[i],str(i), db)
             st.filter()
         except Exception:
             print("Streaming client n°"+ str(i)+ " encountered an exception")
             print("Processing tweets with client n°"+ str(i+1))
+            timers[i]= time.time()
             continue
 
 
