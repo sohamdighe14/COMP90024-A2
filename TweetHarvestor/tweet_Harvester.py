@@ -2,11 +2,9 @@ from lib2to3.pgen2 import token
 from pickle import FALSE, TRUE
 import tweepy
 import configparser
-import csv
 import pandas as pd
 import json
 import couchdb
-import argparse
 import time
 
 
@@ -17,7 +15,7 @@ RADIUS = "40"
 """
 
 
-class tweetStorer(tweepy.StreamingClient):
+"""class tweetStorer(tweepy.StreamingClient):
 
     def __init__(self, bear_tok, tokenNb,database):
         super().__init__(bearer_token=bear_tok)
@@ -30,48 +28,80 @@ class tweetStorer(tweepy.StreamingClient):
         id = data["id"]
         data["id"]="partition:"+id
         data["_id"]=data.pop("id")
-        self.db.save(data)
+        self.db.save(data)"""
 
-def main(tokensFile):
+class listener(tweepy.Stream):
+
+    def __init__(self, key, database):
+        api_key = key["api_key"]
+        api_key_secret = key["api_key_secret"]
+        access_token = key["access_token"]
+        access_token_secret = key["access_token_secret"]
+        super().__init__(api_key, api_key_secret,access_token,access_token_secret)
+        self.db = database
+
+    def on_data(self, data):
+        jsn = json.loads(data)
+        id = str(jsn["id"])
+        jsn["id"]="partition:"+id
+        jsn["_id"]=jsn.pop("id")
+        self.db.save(jsn)
+        return(True)
+
+    def on_error(self, status):
+        print(status)
+
+def main():
     couch = couchdb.Server('http://admin:adminpass@172.26.128.198:5984/')
     db = couch["election_tweets"]
-    
-    tokens = read_bearer_tokens(tokensFile)
+    api_keys = read_api_keys("./config.ini")
     firstIteration = TRUE
     timers=[]
-    for token in tokens:
+
+    for key in api_keys.values():
         timers.append(time.time())
+    currentStream=0
 
-    for i in range(len(tokens)):
-        print(i)
+    for key in api_keys.values():
+        print(currentStream)
         try:
-
             if not(firstIteration):
-                loopTime = time.time()-timers[i]
+                loopTime = time.time()-timers[currentStream]
                 if loopTime < 900:
                     time.sleep(900-loopTime)
                 firstIteration=FALSE
             
-            st = generate_tweepy_streamingClient(tokens[i],str(i), db)
-            st.filter()
+            st = listener(key, db)
+            st.filter(track=["#auspol"])
         except Exception:
-            print("Streaming client n°"+ str(i)+ " encountered an exception")
-            print("Processing tweets with client n°"+ str(i+1))
+            print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
+            print("Processing tweets with client n°"+ str(currentStream+1))
             timers[i]= time.time()
+            currentStream+=1
             continue
 
+def read_api_keys(config_file):
+    # read in all info associated with each key we will be using to authenticate
+    # the tweet harvester
+    config = configparser.ConfigParser()
+    config.read(config_file)
+    keys = dict()
+    for item in config.sections():
+        keys[str(item)] = config[item]
+    return keys
 
-def read_bearer_tokens(tokensFile):
+
+"""def read_bearer_tokens(tokensFile):
     # read in all info associated with each key we will be using to authenticate
     # the tweet harvester
     with open(tokensFile) as f:
-        return f.read().splitlines()
+        return f.read().splitlines()"""
 
-def generate_tweepy_streamingClient(bearer_token,tokennb, db):
+"""def generate_tweepy_streamingClient(bearer_token,tokennb, db):
     # generate a tweepy API to use given access tokens and api keys
     stream = tweetStorer(bear_tok = bearer_token, tokenNb=tokennb, database = db)
     stream.add_rules(tweepy.StreamRule("#auspol lang:en"))
-    return stream
+    return stream"""
 
 """
 def harvest_tweets(key, since_id):
@@ -109,7 +139,7 @@ def harvest_tweets(key, since_id):
 
     tweets.to_csv("KageTweets.csv")"""
 
-def parseArguments():
+"""def parseArguments():
     parser = argparse.ArgumentParser()
 
     # Optional arguments
@@ -117,8 +147,7 @@ def parseArguments():
 
     # Parse arguments
     args = parser.parse_args()
-    return args
+    return args"""
 
 if __name__ == "__main__":
-    args = parseArguments()
-    main(args.bearer_tokens)
+    main()
