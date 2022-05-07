@@ -1,3 +1,3 @@
 FROM python
-RUN pip install -r requirements.txt
-CMD python3 tweet_Harvester.py
+WORKDIR /home/ubuntu/COMP90024-A2/TweetHarvestor 
+CMD [ "python", "./tweet_Harvester.py"]
