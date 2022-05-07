@@ -1,5 +1,3 @@
-from lib2to3.pgen2 import token
-from pickle import FALSE, TRUE
 import tweepy
 import configparser
 import pandas as pd
@@ -55,13 +53,13 @@ def main():
     couch = couchdb.Server('http://admin:adminpass@172.26.128.198:5984/')
     db = couch["election_tweets"]
     api_keys = read_api_keys("./config.ini")
-    firstIteration = TRUE
+    firstIteration = True
     timers=[]
 
     for key in api_keys.values():
         timers.append(time.time())
 
-    while TRUE:   
+    while True:   
         currentStream=0
 
         for key in api_keys.values():
@@ -71,7 +69,7 @@ def main():
                     loopTime = time.time()-timers[currentStream]
                     if loopTime < 900:
                         time.sleep(900-loopTime)
-                    firstIteration=FALSE
+                    firstIteration=False
                 
                 st = listener(key, db)
                 st.filter(track=["#auspol"])
