@@ -60,25 +60,27 @@ def main():
 
     for key in api_keys.values():
         timers.append(time.time())
-    currentStream=0
 
-    for key in api_keys.values():
-        print(currentStream)
-        try:
-            if not(firstIteration):
-                loopTime = time.time()-timers[currentStream]
-                if loopTime < 900:
-                    time.sleep(900-loopTime)
-                firstIteration=FALSE
-            
-            st = listener(key, db)
-            st.filter(track=["#auspol"])
-        except Exception:
-            print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
-            print("Processing tweets with client n°"+ str(currentStream+1))
-            timers[i]= time.time()
-            currentStream+=1
-            continue
+    while TRUE:   
+        currentStream=0
+
+        for key in api_keys.values():
+            print(currentStream)
+            try:
+                if not(firstIteration):
+                    loopTime = time.time()-timers[currentStream]
+                    if loopTime < 900:
+                        time.sleep(900-loopTime)
+                    firstIteration=FALSE
+                
+                st = listener(key, db)
+                st.filter(track=["#auspol"])
+            except Exception:
+                print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
+                print("Processing tweets with client n°"+ str(currentStream+1))
+                timers[i]= time.time()
+                currentStream+=1
+                continue
 
 def read_api_keys(config_file):
     # read in all info associated with each key we will be using to authenticate
