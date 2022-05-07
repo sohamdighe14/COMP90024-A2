@@ -1,3 +1,6 @@
 FROM python
-WORKDIR /home/ubuntu/COMP90024-A2/TweetHarvestor 
-CMD [ "python", "./tweet_Harvester.py"]
+RUN mkdir harvest
+COPY . ./harvest
+RUN pip install -r ./Harvestor/requirements.txt
+WORKDIR ./harvest/ 
+CMD [ "python", "tweet_Harvester.py"]
