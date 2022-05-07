@@ -78,7 +78,7 @@ def main():
             except Exception:
                 print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
                 print("Processing tweets with client n°"+ str(currentStream+1))
-                timers[i]= time.time()
+                timers[currentStream]= time.time()
                 currentStream+=1
                 continue
 
