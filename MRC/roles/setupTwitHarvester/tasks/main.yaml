@@ -1,10 +1,9 @@
 ---
 # Clone source code repository
 - name: Clone the code repository into home directory
-  git:
-    repo: "https://github.com/sohamdighe14/COMP90024-A2.git"
-    version: Twitter_harvester_scalability
-    dest: ~/gitRepo
+  ansible.builtin.git:
+    repo: https://github.com/sohamdighe14/COMP90024-A2.git
+    dest: /home/ubuntu/gitRepo
   become: true
 
 # Create Docker config directory
@@ -20,12 +19,11 @@
 - name: Build an image and push it to local repo
   docker_image:
     build:
-      path: '~/gitRepo/TweetHarvestor/'
+      #args:
+      #  node_number: '{{ node_order.value }}'
+      path: '/home/ubuntu/gitRepo/TweetHarvestor/'
       pull: yes
     name: tweet_harvester_image
-    state: absent
-    force: true 
-    tag: latest
     source: build
   become: yes
 

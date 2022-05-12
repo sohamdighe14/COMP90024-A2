@@ -5,6 +5,7 @@ import pandas as pd
 import json
 import couchdb
 import time
+import argparse
 
 
 """
@@ -37,10 +38,14 @@ class listener(tweepy.Stream):
     def on_error(self, status):
         print(status)
 
-def main():
+def main(nodeNumber):
+    #the main would take nodeNumber as an argument
     couch = couchdb.Server('http://admin:adminpass@172.26.128.198:5984/')
-    db = couch["election_tweets2"]
+    #db = couch["election_tweets" + nodeNumber]
+    db = couch["election_tweets1"]
     api_keys = read_api_keys("./config.ini")
+    filtrationList = ["#auspol #melbourne","#auspol #Morisson","#auspol #Albo4PM"]
+    #filteredHashtags = filtrationList[int(nodeNumber) - 1] #We need to catch a wrong number as argument here
     firstIteration = True
     timers=[]
 
@@ -62,7 +67,8 @@ def main():
                     firstIteration=False
                 
                 st = listener(key, db)
-                st.filter(track=["#auspol #melbourne","#auspol #Morisson","#auspol #Albo4PM", "#auspol"])
+                #st.filter(track=[filteredHashtags])
+                st.filter(track=filtrationList)
             except Exception:
                 print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
                 print("Processing tweets with client n°"+ str(currentStream+1))
@@ -129,15 +135,17 @@ def harvest_tweets(key, since_id):
 
     tweets.to_csv("KageTweets.csv")"""
 
-"""def parseArguments():
+def parseArguments():
     parser = argparse.ArgumentParser()
 
     # Optional arguments
-    parser.add_argument("-b", "--bearer_tokens", help="file containing the bearer tokens", type=str, default='./bearer_tokens.txt')
+    parser.add_argument("-n", "--node_number", help="A number to tell which node is running the script", type=str)
 
     # Parse arguments
     args = parser.parse_args()
-    return args"""
+    return args
 
 if __name__ == "__main__":
+    #args = parseArguments()
+    #main(args.node_number)
     main()

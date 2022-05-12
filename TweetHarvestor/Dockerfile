@@ -3,4 +3,6 @@ RUN mkdir harvest
 COPY . ./harvest
 RUN pip install -r ./harvest/requirements.txt
 WORKDIR ./harvest/ 
+#ARG node_number
+#CMD [ "python", "tweet_Harvester.py", "-n", "echo $node_number"]
 CMD [ "python", "tweet_Harvester.py"]
