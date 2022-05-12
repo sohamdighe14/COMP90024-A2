@@ -32,3 +32,10 @@
     - role: couchDB_slave_nodes_setup
 
 # Sets up a tweets harvester
+- hosts: TwitterHarvester
+  vars_files:
+    - host_vars/Docker.yaml
+  gather_facts: true
+
+  roles:
+    - role: setupTwitHarvester
