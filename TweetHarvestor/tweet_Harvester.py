@@ -1,3 +1,4 @@
+from genericpath import exists
 import tweepy
 import configparser
 import pandas as pd
@@ -13,20 +14,7 @@ RADIUS = "40"
 """
 
 
-"""class tweetStorer(tweepy.StreamingClient):
 
-    def __init__(self, bear_tok, tokenNb,database):
-        super().__init__(bearer_token=bear_tok)
-        self.db = database
-        self.tokenNb = tokenNb
-
-    def on_data(self, rawData):
-        jsn = json.loads(rawData)
-        data = jsn["data"]
-        id = data["id"]
-        data["id"]="partition:"+id
-        data["_id"]=data.pop("id")
-        self.db.save(data)"""
 
 class listener(tweepy.Stream):
 
@@ -51,10 +39,12 @@ class listener(tweepy.Stream):
 
 def main():
     couch = couchdb.Server('http://admin:adminpass@172.26.128.198:5984/')
-    db = couch["election_tweets"]
+    db = couch["election_tweets2"]
     api_keys = read_api_keys("./config.ini")
     firstIteration = True
     timers=[]
+
+    print(api_keys.values())
 
     for key in api_keys.values():
         timers.append(time.time())
@@ -72,7 +62,7 @@ def main():
                     firstIteration=False
                 
                 st = listener(key, db)
-                st.filter(track=["#auspol"])
+                st.filter(track=["#auspol #melbourne"])
             except Exception:
                 print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
                 print("Processing tweets with client n°"+ str(currentStream+1))
