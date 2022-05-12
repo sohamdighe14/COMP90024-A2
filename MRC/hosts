@@ -6,5 +6,8 @@
 [Masternode]
 172.26.128.198
 
+[TwitterHarvester]
+172.26.132.39
+
 [Docker:vars]
 masternode=172.26.128.198
