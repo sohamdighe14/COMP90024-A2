@@ -38,13 +38,13 @@ class listener(tweepy.Stream):
     def on_error(self, status):
         print(status)
 
-def main(nodeNumber):
+def main():
     #the main would take nodeNumber as an argument
     couch = couchdb.Server('http://admin:adminpass@172.26.128.198:5984/')
     #db = couch["election_tweets" + nodeNumber]
-    db = couch["election_tweets1"]
+    db = couch["election_tweets2"]
     api_keys = read_api_keys("./config.ini")
-    filtrationList = ["#auspol #melbourne","#auspol #Morisson","#auspol #Albo4PM"]
+    filtrationList = ["#auspol #melbourne","#auspol #Morisson","#auspol #Albo4PM", "#auspol"]
     #filteredHashtags = filtrationList[int(nodeNumber) - 1] #We need to catch a wrong number as argument here
     firstIteration = True
     timers=[]
