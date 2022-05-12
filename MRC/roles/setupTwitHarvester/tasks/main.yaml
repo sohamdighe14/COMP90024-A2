@@ -23,6 +23,8 @@
       path: '~/gitRepo/TweetHarvestor/'
       pull: yes
     name: tweet_harvester_image
+    state: absent
+    force: true 
     tag: latest
     source: build
   become: yes
