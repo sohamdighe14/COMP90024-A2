@@ -62,7 +62,7 @@ def main():
                     firstIteration=False
                 
                 st = listener(key, db)
-                st.filter(track=["#auspol #melbourne"])
+                st.filter(track=["#auspol #melbourne","#auspol #Morisson","#auspol #Albo4PM"])
             except Exception:
                 print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
                 print("Processing tweets with client n°"+ str(currentStream+1))
