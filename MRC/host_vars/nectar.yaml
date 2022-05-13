@@ -12,6 +12,8 @@ volumes:
     vol_size: 100
   - vol_name: slave2-volume
     vol_size: 100
+  - vol_name: webserver-volume
+    vol_size: 40
   
 #Security groups
 security_groups:
@@ -58,3 +60,5 @@ instances:
     volumes: [slave1-volume]
   - name: slave2
     volumes: [slave2-volume]
+  - name: webserver
+    volumes: [webserver-volume]

@@ -11,3 +11,6 @@
 
 [Docker:vars]
 masternode=172.26.128.198
+
+[Webapp]
+172.26.131.194
