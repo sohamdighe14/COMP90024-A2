@@ -1,8 +1,15 @@
-FROM python
-RUN mkdir harvest
-COPY . ./harvest
-RUN pip install -r ./harvest/requirements.txt
-WORKDIR ./harvest/ 
-#ARG node_number
-#CMD [ "python", "tweet_Harvester.py", "-n", "echo $node_number"]
-CMD [ "python", "init.py"]
+services:
+
+  app:
+    container_name: script
+    restart: always
+    build: ./script
+    ports:
+      - "5000:5000"
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
