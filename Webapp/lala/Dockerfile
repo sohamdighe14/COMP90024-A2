@@ -1,3 +1,3 @@
 FROM nginx
-RUN rm /etc/lala/nginx.conf
-COPY nginx.conf /etc/lala/
+RUN rm /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/
