@@ -10,6 +10,6 @@ services:
   nginx:
     container_name: nginx
     restart: always
-    build: ./nginx
+    build: ./deployment
     ports:
       - "80:80"
