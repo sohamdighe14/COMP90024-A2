@@ -34,7 +34,7 @@
   tags: 'webapp'
   become: yes
   docker_compose:
-    project_src: /home/ubuntu/gitRepo
+    project_src: "/home/ubuntu/gitRepo/Webapp"
     pull: false
     build: yes
     state: present
