@@ -3,7 +3,7 @@
 #  vars_files:
 #    - host_vars/nectar.yaml
 #  gather_facts: true
-
+#
 #  roles:
 #    - role: openstack-common
 #    - role: openstack-volume
