@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible.json#/definitions/tasks": "file:///Users/samy/Desktop/S3/CCC/Asgt2/MRC/Roles/openstack-common/main.yaml"
-    }
-}
