@@ -18,14 +18,14 @@
 - name: Stop webapp Docker container
   become: yes
   docker_container:
-    name: script
+    name: frontend
     state: absent
 
 # Stop deployment container
 - name: Stop deployment Docker container
   become: yes
   docker_container:
-    name: deployment
+    name: backend
     state: absent
 
 # Start nginx and webapp
