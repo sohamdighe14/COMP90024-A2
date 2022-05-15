@@ -1,0 +1,15 @@
+services:
+
+  app:
+    container_name: script
+    restart: always
+    build: ./script
+    ports:
+      - "5000:5000"
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./lala
+    ports:
+      - "8080:80"

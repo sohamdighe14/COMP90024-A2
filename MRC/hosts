@@ -1,4 +1,4 @@
-[Docker]
+[couchDB]
 172.26.128.198
 172.26.132.39
 172.26.129.151
@@ -9,7 +9,7 @@
 [TwitterHarvester]
 172.26.132.39
 
-[Docker:vars]
+[couchDB:vars]
 masternode=172.26.128.198
 
 [Webapp]

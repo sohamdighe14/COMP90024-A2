@@ -1,5 +1,4 @@
 ---
-
 - name: Restart a CouchDB docker container
   become: yes
   community.docker.docker_container:
