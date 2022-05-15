@@ -34,10 +34,10 @@
   become: yes
   docker_compose:
     project_src: "/home/ubuntu/gitRepo/Webapp"
-    pull: false
+    pull: yes
     build: yes
     state: present
-    remove_orphans: no
+    remove_orphans: yes
     recreate: always
 
 
