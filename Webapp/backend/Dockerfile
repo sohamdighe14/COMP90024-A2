@@ -7,5 +7,5 @@
 #  Samy Allouache      - Student ID: 1210426 - Melbourne
 
 FROM nginx
-COPY /home/ubuntu/gitRepo/Webapp/backend/. .
-COPY /home/ubuntu/gitRepo/Webapp/backend/nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
