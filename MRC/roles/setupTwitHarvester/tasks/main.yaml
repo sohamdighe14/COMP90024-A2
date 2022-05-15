@@ -13,20 +13,15 @@
     path: '~/.docker'
     state: 'directory'
 
-
-
 # Build Docker image for tweet harvester
 - name: Build an image and push it to local repo
   docker_image:
     build:
-      #args:
-      #  node_number: '{{ node_order.value }}'
       path: '/home/ubuntu/gitRepo/TweetHarvestor/'
       pull: yes
     name: tweet_harvester_image
     source: build
   become: yes
-
 
 # Stop existing Docker containers for Twitter Harvesters and remove them (if any)
 - name: Stop Twitter Harvester Docker container
@@ -34,8 +29,6 @@
   docker_container:
     name: harvesting_container
     state: absent
-
-
 
 # Create new docker container for Twitter Harvester and start container
 - name: Create and start Twitter Harvester Docker container
