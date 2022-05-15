@@ -41,7 +41,7 @@
   become: yes
   docker_compose:
     project_src: "/home/ubuntu/gitRepo/Webapp"
-    pull: no
+    pull: yes
     build: yes
     state: present
     remove_orphans: yes
