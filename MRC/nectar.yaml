@@ -1,44 +1,47 @@
-- hosts: localhost
-  vars_files:
-    - host_vars/nectar.yaml
-  gather_facts: true
+#Generates the MRC instances
+#- hosts: localhost
+#  vars_files:
+#    - host_vars/nectar.yaml
+#  gather_facts: true
+#
+#  roles:
+#    - role: openstack-common
+#    - role: openstack-volume
+#    - role: openstack-security-group
+#    - role: openstack-instance
 
-  roles:
-    - role: openstack-common
-    #- role: openstack-images
-    - role: openstack-volume
-    - role: openstack-security-group
-    - role: openstack-instance
-    #- role: openstack-volume-snapshot
+#Begins to set up the CouchDB database 
+#- hosts: couchDB
+#  vars_files:
+#    - host_vars/couchDB.yaml
+#  gather_facts: true
+#
+#  roles:
+#    - role: common
+#     - role: docker    
+#    - role: volumes
+#    - role: setupCouchDB
 
-- hosts: Docker
-  vars_files:
-    - host_vars/Docker.yaml
-  gather_facts: true
-
-  roles:
-    - role: common
-    - role: docker    
-    - role: volumes
-    - role: setupCouchDB
 
 # Perform CouchDB configuration on slave nodes
-- hosts: Docker:!Masternode
-  vars_files:
-    - host_vars/Docker.yaml
-  gather_facts: true
+#- hosts: couchDB:!Masternode
+#  vars_files:
+#    - host_vars/couchDB.yaml
+#  gather_facts: true
+#
+#  roles:
+#    - role: couchDB_slave_nodes_setup
 
-  roles:
-    - role: couchDB_slave_nodes_setup
 
 # Sets up a tweets harvester
-- hosts: TwitterHarvester
-  vars_files:
-    - host_vars/twitterHarverster.yaml
-  gather_facts: true
+#- hosts: TwitterHarvester
+#  vars_files:
+#    - host_vars/twitterHarverster.yaml
+#  gather_facts: true
+#
+#  roles:
+#    - role: setupTwitHarvester
 
-  roles:
-    - role: setupTwitHarvester
 
 # Sets up the web app
 - hosts: Webapp
@@ -50,3 +53,4 @@
     - role: common
     - role: docker    
     - role: volumes
+    - role: setupWebapp
