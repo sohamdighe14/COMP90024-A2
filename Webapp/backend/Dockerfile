@@ -6,6 +6,6 @@
 #  Soham Swapnil Dighe - Student ID: 1219439 - Melbourne
 #  Samy Allouache      - Student ID: 1210426 - Melbourne
 
-FROM nginx:alpine
+FROM nginx
 COPY /home/ubuntu/gitRepo/Webapp/backend/ .
 COPY /home/ubuntu/gitRepo/Webapp/backend/nginx.conf /etc/nginx/nginx.conf
