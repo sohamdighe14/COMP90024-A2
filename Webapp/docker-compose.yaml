@@ -1,15 +1,14 @@
 services:
-
   app:
-    container_name: script
+    container_name: frontend
     restart: always
-    build: ./script
+    build: ./frontend
     ports:
       - "5000:5000"
 
   nginx:
-    container_name: nginx
+    container_name: backend
     restart: always
-    build: ./lala
+    build: ./backend
     ports:
       - "8080:80"

@@ -4,7 +4,6 @@
   ansible.builtin.git:
     repo: https://github.com/sohamdighe14/COMP90024-A2.git
     dest: /home/ubuntu/gitRepo
-    version: webapp_deployment
   become: true
 
 # Create Docker config directory

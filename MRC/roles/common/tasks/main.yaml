@@ -17,8 +17,10 @@
       'python3-setuptools', 
       'software-properties-common', 
       'unzip', 
-      'vim', 
-      'nginx']
+      'vim',
+      'nginx', 
+      'apache2',
+      'apache2-utils']
     state: latest
     install_recommends: no
     update_cache: yes
