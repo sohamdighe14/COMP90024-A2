@@ -9,7 +9,7 @@
   <!--AOS-->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!--STYLE SHEET-->
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
   <!--Leaflet JS-->
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
   <!--FONT AWESOME CSS-->
@@ -29,7 +29,7 @@
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
   <!--STYLE SHEET-->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 <!--TITLE-->
 <title>City of Melbourne Group 73</title>
@@ -61,8 +61,8 @@
     </div>
 <!--PARTICLE JS-->
     <div id="particles-js" style="height: 25vh; position: relative;"></div>
-    <script type="text/javascript" src="JS/particles.js"></script>
-    <script type="text/javascript" src="JS/app.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='scripts/particles.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='scripts/app.js') }}"></script>
 
 <!--HISTORY SECTION-->
     <!--container SECTION-->
@@ -728,8 +728,8 @@
       </script>
 <!--EXTERNAL JS LIBRARIES-->
 
-      <script src="JS/rellax.js"></script>
-      <script src="JS/rellax.min.js"></script>
+      <script src="{{ url_for('static',filename='scripts/rellax.js') }}"></script>
+      <script src="{{ url_for('static',filename='scripts/rellax.min.js') }}"></script>
 <!--RELLAX CONFIG-->
       <script>
         var rellax = new Rellax('.rellax')
