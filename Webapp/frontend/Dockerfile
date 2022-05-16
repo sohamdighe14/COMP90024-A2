@@ -7,7 +7,7 @@
 #  Samy Allouache      - Student ID: 1210426 - Melbourne
 
 FROM python
-COPY . /script
-WORKDIR /script
-RUN pip install -r /script/requirements.txt
+COPY . /frontend
+WORKDIR /frontend
+RUN pip install -r /frontend/requirements.txt
 CMD [ "python", "init.py"]
