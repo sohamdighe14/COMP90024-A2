@@ -28,7 +28,7 @@
       'software-properties-common', 
       'unzip', 
       'vim',
-      'nginx']
+      'apache2']
     state: latest
     install_recommends: no
     update_cache: yes

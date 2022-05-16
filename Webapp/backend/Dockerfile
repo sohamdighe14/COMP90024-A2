@@ -6,6 +6,6 @@
 #  Soham Swapnil Dighe - Student ID: 1219439 - Melbourne
 #  Samy Allouache      - Student ID: 1210426 - Melbourne
 
-FROM nginx
-RUN rm /etc/nginx/nginx.conf
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM httpd:2.4
+WORKDIR /etc/apache2/htdocs/
+COPY ../frontend/pages/
