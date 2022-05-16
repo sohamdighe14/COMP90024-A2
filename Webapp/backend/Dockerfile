@@ -8,4 +8,4 @@
 
 FROM httpd:2.4
 WORKDIR /etc/apache2/htdocs/
-COPY ../frontend/pages/
+COPY ../frontend/pages/ /etc/apache2/htdocs/
