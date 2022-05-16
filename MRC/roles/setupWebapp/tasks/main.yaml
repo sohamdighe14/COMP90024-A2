@@ -26,7 +26,7 @@
 - name: Stop webapp Docker container
   become: yes
   docker_container:
-    name: webapp_apache
+    name: frontend_apache
     state: absent
 
 
@@ -41,29 +41,3 @@
     state: present
     remove_orphans: yes
     recreate: always
-
-
-#- name: Copy website files to the server's document root
-#  copy:
-#    src: "{{ app_root }}"
-#    dest: "{{ document_root }}"
-#    mode: preserve
-
-#- name: Apply Nginx template
-#  ansible.builtin.template:
-#    src: files/nginx.conf.j2
-#    dest: /etc/nginx/sites-available/default
-#  notify: Restart Nginx
-
-#- name: Enable new site
-#  ansible.builtin.file:
-#    src: /etc/nginx/sites-available/default
-#    dest: /etc/nginx/sites-enabled/default
-#    state: link
-#  notify: Restart Nginx
-
-#- name: Allow all access to tcp port 80
-#  community.general.ufw:
-#    rule: allow
-#    port: '80'
-#    proto: tcp

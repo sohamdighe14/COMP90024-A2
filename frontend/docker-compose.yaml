@@ -11,6 +11,6 @@ services:
   apache:
     image: httpd:2.4
     ports:
-      - 8080:80
+      - 5984:80
     volumes:
       - ./plots:/usr/local/apache2/htdocs
