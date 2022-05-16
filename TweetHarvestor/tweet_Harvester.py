@@ -9,20 +9,9 @@
 from genericpath import exists
 import tweepy
 import configparser
-import pandas as pd
 import json
 import couchdb
 import time
-import argparse
-
-
-"""
-MELB_LAT = 	"-37.840935"
-MELB_LONG = "144.946457"
-RADIUS = "40"
-"""
-
-
 
 
 class listener(tweepy.Stream):
@@ -47,13 +36,10 @@ class listener(tweepy.Stream):
         print(status)
 
 def main():
-    #the main would take nodeNumber as an argument
     couch = couchdb.Server('http://admin:adminpass@172.26.128.198:5984/')
-    #db = couch["election_tweets" + nodeNumber]
     db = couch["election_tweets1"]
     api_keys = read_api_keys("./config.ini")
     filtrationList = ["#auspol #melbourne","#auspol #Morisson","#auspol #Albo4PM", "#auspol"]
-    #filteredHashtags = filtrationList[int(nodeNumber) - 1] #We need to catch a wrong number as argument here
     firstIteration = True
     timers=[]
 
@@ -72,10 +58,9 @@ def main():
                     loopTime = time.time()-timers[currentStream]
                     if loopTime < 900:
                         time.sleep(900-loopTime)
-                    firstIteration=False
-                
+                    
+                firstIteration=False
                 st = listener(key, db)
-                #st.filter(track=[filteredHashtags])
                 st.filter(track=filtrationList)
             except Exception:
                 print("Streaming client n°"+ str(currentStream)+ " encountered an exception")
@@ -94,66 +79,5 @@ def read_api_keys(config_file):
         keys[str(item)] = config[item]
     return keys
 
-
-"""def read_bearer_tokens(tokensFile):
-    # read in all info associated with each key we will be using to authenticate
-    # the tweet harvester
-    with open(tokensFile) as f:
-        return f.read().splitlines()"""
-
-"""def generate_tweepy_streamingClient(bearer_token,tokennb, db):
-    # generate a tweepy API to use given access tokens and api keys
-    stream = tweetStorer(bear_tok = bearer_token, tokenNb=tokennb, database = db)
-    stream.add_rules(tweepy.StreamRule("#auspol lang:en"))
-    return stream"""
-
-"""
-def harvest_tweets(key, since_id):
-   # harvest tweets that are newer than a particular tweet using a given key
-    try:
-        
-    except tweepy.TweepyException:
-        return None
-"""  
-
-
-"""def tweet_harvester(keys):
-    # given a list of keys, find a key that can be used to harvest tweets and 
-    # harvest as many as we can. If no keys work, sleep for 15 minutes
-    for token in tokens:
-        st = generate_tweepy_api(token)
-        st.filter()
-    pass
-"""
-"""def insert_tweets():
-    # insert tweets into a couchDB instance (perhaps do some basic filtering)
-    pass
-"""
-# read configs
-"""def somethingelse():
-    user = api.get_user(screen_name = "Kage_317")
-    ID = user.id_str
-
-    tweets = pd.DataFrame(columns = ["time","content", "name", "location"])
-
-    for tweet in api.user_timeline(user_id = ID, screen_name = "Kage_317"):
-        pd_info = pd.DataFrame([[tweet.created_at, tweet.text, tweet.user.screen_name, 
-                tweet.user.location]], columns = ["time","content", "name", "location"])
-        tweets = pd.concat([tweets, pd_info], ignore_index=True)
-
-    tweets.to_csv("KageTweets.csv")"""
-
-def parseArguments():
-    parser = argparse.ArgumentParser()
-
-    # Optional arguments
-    parser.add_argument("-n", "--node_number", help="A number to tell which node is running the script", type=str)
-
-    # Parse arguments
-    args = parser.parse_args()
-    return args
-
 if __name__ == "__main__":
-    #args = parseArguments()
-    #main(args.node_number)
     main()
