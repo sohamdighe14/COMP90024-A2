@@ -9,3 +9,5 @@ nltk
 textblob
 seaborn
 matplotlib
+flask
+requests
