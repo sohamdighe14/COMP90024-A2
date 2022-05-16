@@ -11,6 +11,7 @@
   ansible.builtin.git:
     repo: https://github.com/sohamdighe14/COMP90024-A2.git
     dest: /home/ubuntu/gitRepo
+    version: frontend
   become: true
 
 # Create Docker config directory
@@ -25,22 +26,16 @@
 - name: Stop webapp Docker container
   become: yes
   docker_container:
-    name: frontend
+    name: webapp_apache
     state: absent
 
-# Stop deployment container
-- name: Stop deployment Docker container
-  become: yes
-  docker_container:
-    name: backend
-    state: absent
 
 # Start nginx and webapp
 - name: Run docker compose
   tags: 'webapp'
   become: yes
   docker_compose:
-    project_src: "/home/ubuntu/gitRepo/Webapp"
+    project_src: "/home/ubuntu/gitRepo/frontend"
     pull: yes
     build: yes
     state: present

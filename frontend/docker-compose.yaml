@@ -6,6 +6,11 @@
 #  Soham Swapnil Dighe - Student ID: 1219439 - Melbourne
 #  Samy Allouache      - Student ID: 1210426 - Melbourne
 
-pandas
-couchdb
-folium
+version: '3'
+services:
+  apache:
+    image: httpd:2.4
+    ports:
+      - 8080:80
+    volumes:
+      - ./plots:/usr/local/apache2/htdocs
