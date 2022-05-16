@@ -59,7 +59,7 @@
 - name: copy nginx file
   become: yes
   copy: 
-    src: "/home/ubuntu/gitRepo/Webapp/nginx/nginx.conf"
+    remote_src: "/home/ubuntu/gitRepo/Webapp/nginx/nginx.conf"
     dest: /etc/nginx/nginx.conf
     owner: root
     group: root
