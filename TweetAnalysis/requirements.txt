@@ -1,3 +1,11 @@
 python-dateutil
 pandas
 couchdb
+chart-studio
+pyldavis
+sklearn
+plotly
+nltk
+textblob
+seaborn
+matplotlib
