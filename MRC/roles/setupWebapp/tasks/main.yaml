@@ -26,18 +26,25 @@
 - name: Stop webapp Docker container
   become: yes
   docker_container:
-    name: frontend_apache
+    name: flask_app
     state: absent
 
+- name: Stop nginx Docker container
+  become: yes
+  docker_container:
+    name: nginx
+    state: absent
 
 # Start nginx and webapp
 - name: Run docker compose
   tags: 'webapp'
   become: yes
-  docker_compose:
-    project_src: "/home/ubuntu/gitRepo/frontend"
+  docker_compose: 
+    remove_images: local
+    project_src: "/home/ubuntu/gitRepo/Webapp"
     pull: yes
     build: yes
+    nocache: yes
     state: present
     remove_orphans: yes
     recreate: always
