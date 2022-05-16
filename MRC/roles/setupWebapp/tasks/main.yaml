@@ -59,10 +59,17 @@
 - name: copy nginx file
   become: yes
   copy: 
-    remote_src: "/home/ubuntu/gitRepo/Webapp/nginx/nginx.conf"
+    src: nginx.conf
     dest: /etc/nginx/nginx.conf
     owner: root
     group: root
+
+
+- name: stop apache httpd
+  become: yes
+  shell:
+    cmd: /etc/init.d/apache2 stop
+
 
 - name: restart nginx
   become: yes
