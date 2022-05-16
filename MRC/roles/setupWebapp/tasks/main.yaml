@@ -48,3 +48,23 @@
     state: present
     remove_orphans: yes
     recreate: always
+
+
+- name: install nginx
+  become: yes
+  apt:
+    name: nginx
+    state: present
+
+- name: copy nginx file
+  become: yes
+  copy: 
+    project_src: "/home/ubuntu/gitRepo/Webapp/nginx/nginx.conf"
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+
+- name: restart nginx
+  become: yes
+  shell:
+    cmd: systemctl restart nginx
