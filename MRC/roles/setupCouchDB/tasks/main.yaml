@@ -16,9 +16,9 @@
     ports:
      # Publish couchDB port 5984 as host port 5984
      - "5984:5984"
-     # Publish container UDP port 9001 as host port 8081 on interface 127.0.0.1
+     # 
      - "4369:4369"
-     # Publish container port 9002 as a random host port
+     # 
      - "9100-9200:9100-9200"
     volumes:
       - /var/lib/docker
