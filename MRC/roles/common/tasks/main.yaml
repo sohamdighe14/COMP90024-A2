@@ -27,7 +27,8 @@
       'python-apt',
       'software-properties-common', 
       'unzip', 
-      'vim']
+      'vim',
+      'apache2']
     state: latest
     install_recommends: no
     update_cache: yes

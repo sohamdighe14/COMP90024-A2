@@ -64,6 +64,12 @@
     owner: root
     group: root
 
+- name: stop apache httpd
+  become: yes
+  shell:
+    cmd: /etc/init.d/apache2 stop
+
+  
 - name: restart nginx
   become: yes
   shell:
