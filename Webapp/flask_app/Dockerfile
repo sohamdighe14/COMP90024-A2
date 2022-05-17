@@ -10,7 +10,7 @@ RUN apt-get update
 COPY . ./flask_app
 WORKDIR ./flask_app
 RUN pip3 install flask
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
 
 EXPOSE 5000
 CMD ["python","app.py"]
