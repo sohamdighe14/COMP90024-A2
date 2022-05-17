@@ -10,3 +10,4 @@ textblob
 seaborn
 matplotlib
 flask
+requests

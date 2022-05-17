@@ -9,6 +9,8 @@ RUN apt-get update
 # Copy webapp and Install requirements
 COPY . ./flask_app
 WORKDIR ./flask_app
+RUN pip3 install flask
 RUN pip3 install -r requirements.txt
+
 EXPOSE 5000
 CMD ["python","app.py"]

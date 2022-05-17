@@ -17,5 +17,21 @@ app = Flask(__name__)
 def index_pg():
   return render_template('index.html')
 
+@app.route('/all_tweets',methods=['GET','POST'])
+def all_pg():
+  return render_template('all_tweets.html')
+
+@app.route('/tax_tweets',methods=['GET','POST'])
+def tax_pg():
+  return render_template('tax_tweets.html')
+
+@app.route('/climate_tweets',methods=['GET','POST'])
+def climate_pg():
+  return render_template('climate_tweets.html')
+
+@app.route('/housing_tweets',methods=['GET','POST'])
+def housing_pg():
+  return render_template('housing_tweets.html')
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+  app.run(host='0.0.0.0',debug=True)

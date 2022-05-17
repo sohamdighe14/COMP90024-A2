@@ -6,5 +6,6 @@
 #  Soham Swapnil Dighe - Student ID: 1219439 - Melbourne
 #  Samy Allouache      - Student ID: 1210426 - Melbourne
 
+pandas
 couchdb
 tweepy
