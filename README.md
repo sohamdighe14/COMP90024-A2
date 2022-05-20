@@ -1,7 +1,12 @@
 # COMP90024-A2
+[Update 20/05/2022]
+- Some cleaning of the files
+- update of the README
+
 Assignment 2 for Cloud Computing course 
 
 This projects can be separated in two main usage. First the deployment of a database a tweet harvester and a website on the university of Melbourne Research Cloud; and second the use of the said website.
+
 ---
 
 ## Deployment guide
@@ -57,3 +62,14 @@ You will once again be asked your password, but after that, you should have a co
 ---
 
 ## End user usage
+
+To use our web app you will first need to use a VPN to connect to the university's network.
+Once this is settle, you can connect to our website by typing its ip address in the search bar of any web browser 
+`172.26.131.211`
+
+Below is a screenshot of our webapp's front page 
+![Alt text](/assets/website.png)
+
+Once you are connected, you can explore the different scenarios we thought about. 
+
+If you want further analysis and interpretation, you can refer to our report or this repository.
